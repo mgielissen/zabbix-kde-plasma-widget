@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Mario"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Shows active Zabbix problems (triggers) with severity colors",
+        "Icon": "network-server",
+        "Id": "com.example.zabbix",
+        "License": "MIT",
+        "Name": "Zabbix",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
