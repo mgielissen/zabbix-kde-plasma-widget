@@ -1,0 +1,8 @@
+qml: zabbix DEBUG interval -> 10000
+qml: zabbix DEBUG refresh start, status: 
+qml: 0
+qml: zabbix DEBUG fetch done: ERR Network error
+qml: zabbix DEBUG tick 1793893374472 interval: 10000
+qml: zabbix DEBUG refresh start, status: error
+qml: zabbix DEBUG running false interval: 10000 cfg: 10
+qml: zabbix DEBUG fetch done: ERR Network error

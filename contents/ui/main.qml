@@ -126,12 +126,24 @@ PlasmoidItem {
 
     Component.onCompleted: refresh()
 
+    // Periodic refresh.
+    //
+    // Workaround for a Qt >= 6.9 behaviour change: QML Timer is driven by
+    // the attached window's frame driver and flips its own "running" back
+    // to false after the first trigger when the window idles (not repainted
+    // or not exposed), which silently freezes repeat-timers in plasmoids.
+    // Re-arming the timer inside onTriggered keeps the refresh loop alive
+    // in every window state (desktop widget, panel, hidden, occluded).
     Timer {
         id: refreshTimer
         interval: Math.max(10, Plasmoid.configuration.refreshInterval) * 1000
+        repeat: true
         running: true
         triggeredOnStart: false
-        onTriggered: root.refresh()
+        onTriggered: {
+            root.refresh();
+            restart();
+        }
     }
 
     // Re-fetch immediately when relevant settings change.

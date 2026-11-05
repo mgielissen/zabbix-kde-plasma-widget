@@ -7,7 +7,8 @@ of a Zabbix server, colored with the standard Zabbix severity colors.
 
 - Live problem list, most severe first, with host name and how long it is active
 - Standard Zabbix severity colors (Not classified → Disaster)
-- Auto-refresh (interval configurable, default 60 s)
+- Auto-refresh (interval configurable, default 60 s); includes a workaround
+  for a Qt ≥ 6.9 behaviour change where QML `Timer` freezes in idle windows
 - Click a problem to open it in the Zabbix web UI
 - Compact panel mode: warning icon + problem count
 - Two authentication modes:
