@@ -83,6 +83,13 @@ be trusted by the system (`/usr/local/share/ca-certificates/` +
 kpackagetool6 --remove com.example.zabbix --type Plasma/Applet
 ```
 
+## License
+
+GPL-2.0-or-later, the same license used by KDE Plasma and Zabbix — see
+`LICENSE`.
+
+Copyright 2026 Mario Gielissen <mario@gielissen.org>
+
 ## Layout
 
 ```

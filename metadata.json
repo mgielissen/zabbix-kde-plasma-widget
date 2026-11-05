@@ -3,16 +3,18 @@
     "KPlugin": {
         "Authors": [
             {
-                "Name": "Mario"
+                "Name": "Mario Gielissen",
+                "Email": "mario@gielissen.org"
             }
         ],
         "Category": "System Information",
         "Description": "Shows active Zabbix problems (triggers) with severity colors",
         "Icon": "network-server",
         "Id": "com.example.zabbix",
-        "License": "MIT",
+        "License": "GPL-2.0-or-later",
         "Name": "Zabbix",
-        "Version": "0.1.0"
+        "Version": "0.1.0",
+        "Website": "https://github.com/mgielissen/zabbix-kde-plasma-widget"
     },
     "X-Plasma-API-Minimum-Version": "6.0"
 }

@@ -1,4 +1,7 @@
 /*
+ * SPDX-FileCopyrightText: 2026 Mario Gielissen <mario@gielissen.org>
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  * Zabbix widget for KDE Plasma 6
  *
  * Shows active Zabbix problems (triggers) via the Zabbix JSON-RPC API,

@@ -1,4 +1,7 @@
 /*
+ * SPDX-FileCopyrightText: 2026 Mario Gielissen <mario@gielissen.org>
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  * Zabbix JSON-RPC 2.0 API client (pure QML/JS, uses XMLHttpRequest).
  *
  * Supports:
