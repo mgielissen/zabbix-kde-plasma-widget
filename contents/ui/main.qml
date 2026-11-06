@@ -216,6 +216,7 @@ PlasmoidItem {
 
         // Header
         RowLayout {
+            id: headerRow
             Layout.fillWidth: true
 
             Kirigami.Heading {
@@ -255,67 +256,87 @@ PlasmoidItem {
             }
         }
 
-        // Not configured
-        Kirigami.InlineMessage {
+        // Status/content area: the single fillHeight item so that any extra
+        // vertical space lands here instead of being spread between the other
+        // items (Qt >= 6.10 layout engines distribute surplus space, which
+        // would create gaps above the header).
+        Item {
+            id: contentArea
             Layout.fillWidth: true
-            visible: !root.configured
-            type: Kirigami.MessageType.Information
-            text: i18n("Open the settings of this widget to configure the Zabbix server URL and authentication.")
-        }
+            Layout.fillHeight: true
+            Layout.minimumHeight: Kirigami.Units.gridUnit * 4
 
-        // Error
-        Kirigami.InlineMessage {
-            Layout.fillWidth: true
-            visible: root.status === "error"
-            type: Kirigami.MessageType.Warning
-            text: root.errorMessage
-            actions: [
-                QQC2.Action {
-                    text: i18n("Retry")
-                    onTriggered: root.refresh()
+            // Stacked messages; a plain Column so invisible items take no space.
+            Column {
+                id: messageArea
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
                 }
-            ]
-        }
+                spacing: Kirigami.Units.smallSpacing
 
-        // Loading placeholder
-        PlasmaComponents3.Label {
-            Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
-            visible: root.status === "loading" && root.problemCount === 0
-            horizontalAlignment: Text.AlignHCenter
-            opacity: 0.7
-            text: i18n("Loading problems…")
-        }
+                // Not configured
+                Kirigami.InlineMessage {
+                    width: parent.width
+                    visible: !root.configured
+                    type: Kirigami.MessageType.Information
+                    text: i18n("Open the settings of this widget to configure the Zabbix server URL and authentication.")
+                }
 
-        // No problems
-        RowLayout {
-            Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
-            visible: root.status === "ok" && root.problemCount === 0 && root.configured
-            Item { Layout.fillWidth: true }
-            Kirigami.Icon {
-                source: "dialog-ok-apply"
-                Layout.preferredWidth: Kirigami.Units.iconSizes.medium
-                Layout.preferredHeight: Kirigami.Units.iconSizes.medium
-                color: Kirigami.Theme.positiveTextColor
+                // Error
+                Kirigami.InlineMessage {
+                    width: parent.width
+                    visible: root.status === "error"
+                    type: Kirigami.MessageType.Warning
+                    text: root.errorMessage
+                    actions: [
+                        QQC2.Action {
+                            text: i18n("Retry")
+                            onTriggered: root.refresh()
+                        }
+                    ]
+                }
+
+                // Loading placeholder
+                PlasmaComponents3.Label {
+                    width: parent.width
+                    visible: root.status === "loading" && root.problemCount === 0
+                    horizontalAlignment: Text.AlignHCenter
+                    opacity: 0.7
+                    text: i18n("Loading problems…")
+                }
             }
-            PlasmaComponents3.Label {
-                text: i18n("No active problems")
-                color: Kirigami.Theme.positiveTextColor
-            }
-            Item { Layout.fillWidth: true }
-        }
 
-        // Problem list
-        ProblemList {
-            visible: root.problemCount > 0
-            problems: root.problems
-            openWebUiOnProblem: Plasmoid.configuration.openWebUi
-            onProblemActivated: (eventid, triggerid) => root.openWebUi(eventid, triggerid)
+            // No problems
+            RowLayout {
+                anchors.centerIn: parent
+                visible: root.status === "ok" && root.problemCount === 0 && root.configured
+                Kirigami.Icon {
+                    source: "dialog-ok-apply"
+                    implicitWidth: Kirigami.Units.iconSizes.medium
+                    implicitHeight: Kirigami.Units.iconSizes.medium
+                    color: Kirigami.Theme.positiveTextColor
+                }
+                PlasmaComponents3.Label {
+                    text: i18n("No active problems")
+                    color: Kirigami.Theme.positiveTextColor
+                }
+            }
+
+            // Problem list
+            ProblemList {
+                anchors.fill: parent
+                visible: root.problemCount > 0
+                problems: root.problems
+                openWebUiOnProblem: Plasmoid.configuration.openWebUi
+                onProblemActivated: (eventid, triggerid) => root.openWebUi(eventid, triggerid)
+            }
         }
 
         // Footer
         PlasmaComponents3.Label {
+            id: footerLabel
             Layout.fillWidth: true
             visible: root.status === "ok"
             opacity: 0.6

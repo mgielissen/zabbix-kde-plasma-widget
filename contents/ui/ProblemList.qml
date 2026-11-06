@@ -19,10 +19,6 @@ ListView {
 
     signal problemActivated(string eventid, string triggerid)
 
-    Layout.fillWidth: true
-    Layout.fillHeight: true
-    Layout.minimumHeight: Kirigami.Units.gridUnit * 4
-
     model: problems
     boundsBehavior: Flickable.StopAtBounds
     clip: true
